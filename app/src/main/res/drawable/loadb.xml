@@ -89,8 +89,8 @@
                     </propertyValuesHolder>
                     <propertyValuesHolder android:propertyName="strokeColor">
                         <keyframe android:fraction="0" android:value="@color/dO" />
-                        <keyframe android:fraction=".5" android:value="@color/dO"/>
-                        <keyframe android:fraction=".75" android:value="@color/dC"/>
+                        <keyframe android:fraction=".5" android:value="@color/aC"/>
+                        <keyframe android:fraction=".75" android:value="@color/aC"/>
                         <keyframe android:fraction="1" android:value="@color/dO"/>
                     </propertyValuesHolder>
                 </objectAnimator>

@@ -6,26 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/aO">
-
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:particleCount="50"
+        app:particleMinRadius="3"
+        app:particleMaxRadius="6"
+        app:particlesBackgroundColor="@color/aO50"
+        app:particleColor="@color/bb50"
+        app:particleLineColor="@color/bb50"
+        app:particleLinesEnabled="true"
+        />
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:srcCompat="@drawable/loadb"
-        android:id="@+id/loadIng"
+        android:id="@+id/loadImg"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
-
-
     <TextView
-        android:layout_below="@+id/loadIng"
+        android:layout_below="@+id/loadImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textColor="@color/bb"
         android:textSize="25sp"
         android:paddingTop="10sp"
+        android:id="@+id/loadTxt"
         android:layout_centerHorizontal="true"
         />
-
 </RelativeLayout>

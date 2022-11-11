@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "mx.unam.unaminternacional.dgecimovil"
-        minSdk 21
+        minSdk 28
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -29,7 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
 }
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -45,5 +44,5 @@ dependencies {
     //Gson - serializar y de-serializar data entre objetos JSON y objetos Java.
     implementation 'com.google.code.gson:gson:2.8.6'
     //android-particles :)
-    //implementation 'com.github.ibrahimsn98:android-particles:2.0'
+    implementation 'com.github.ibrahimsn98:android-particles:2.0'
 }
