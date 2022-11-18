@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="aI">#17a2b8</color>
-    <color name="aC">#005794</color>
-    <color name="aO">#102040</color>
-    <color name="dC">#c99c22</color>
-    <color name="dO">#9a7321</color>
-    <color name="nn">#444444</color>
-    <color name="bb">#FFFFFF</color>
+    <color name="aS">#FF9FD8EA</color>
+    <color name="aI">#FF3FA2D6</color>
+    <color name="aC">#FF005794</color>
+    <color name="aO">#FF102040</color>
 
-    <color name="gO">#888888</color>
-    <color name="gC">#e2e2e2</color>
-    <color name="success">#28a745</color>
-    <color name="warning">#ffc107</color>
-    <color name="danger">#dc3545</color>
+    <color name="dS">#FFE2CA8E</color>
+    <color name="dI">#FFC99C21</color>
+    <color name="dC">#FF997220</color>
+    <color name="dO">#FF664818</color>
+
+    <color name="oS">#FFFDDFB2</color>
+    <color name="oI">#FFF3961C</color>
+    <color name="oC">#FFEE7B11</color>
+    <color name="oO">#FFE65313</color>
+
+    <color name="bb">#FFFFFFFF</color>
+    <color name="gC">#FFE2E2E2</color>
+    <color name="gO">#FF888888</color>
+    <color name="nn">#FF444444</color>
+
+    <color name="successC">#FF89BE95</color>
+    <color name="success">#FF28A745</color>
+
+    <color name="warningC">#FFCFBC80</color>
+    <color name="warning">#FFFFC107</color>
+
+    <color name="dangerC">#FFFFB4AB</color>
+    <color name="danger">#FFdc3545</color>
 
     <color name="bb50">#80FFFFFF</color>
     <color name="aO50">#80102040</color>

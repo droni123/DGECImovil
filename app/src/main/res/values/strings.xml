@@ -1,4 +1,25 @@
 <resources>
-    <string name="app_name">DGECImovil</string>
-    <string name="app_load"><![CDATA[<b>DGECI</b>movil]]></string>
+    <string name="app_load"><![CDATA[<b>DGECI</b>móvil]]></string>
+    <string name="dgeci">DGECI_</string>
+    <string name="app_name">DGECImóvil</string>
+    <string name="dgeci_nombre">Dirección General de Cooperación e Internacionalización</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="mensaje_bienvenida">
+        Bienvenido(a) a DGECImóvil\n\n
+        Para acceder necesitamos que registres tu dispositivo en la plataforma SGMES\n
+        https://sgmes.unaminternacional.unam.mx/\n\n
+    </string>
+    <string name="mensaje_instrucciones">
+        Accede a tu perfil y da click en vincular dispositivo.\n\n
+        Con el token generado a la mano da click en siguiente.
+    </string>
+    <string name="url_dgeci">https://sgmes.unaminternacional.unam.mx/</string>
+
+    <string name="authCorreo">E-Mail</string>
+    <string name="authNcuenta">No. de cuenta UNAM</string>
+    <string name="authPass">Contraseña</string>
+    <string name="authToken">Token</string>
+    <string name="esconder">Esconder</string>
+    <string name="mostrar">Mostrar</string>
 </resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/degradado_ac_ao"
+    tools:context=".activitys.auth.AuthLoginFragment">
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:particleCount="50"
+        app:particleMinRadius="3"
+        app:particleMaxRadius="6"
+        app:particlesBackgroundColor="@color/aO"
+        app:particleColor="@color/bb50"
+        app:particleLineColor="@color/bb50"
+        app:particleLinesEnabled="true"
+        />
+    <androidx.compose.ui.platform.ComposeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/formulario_is"
+        />
+</RelativeLayout>

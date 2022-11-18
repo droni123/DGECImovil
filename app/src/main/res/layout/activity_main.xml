@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activitys.Main"
     android:background="@color/aO">
     <me.ibrahimsn.particle.ParticleView
         android:id="@+id/particleView"
@@ -13,28 +13,33 @@
         app:particleCount="50"
         app:particleMinRadius="3"
         app:particleMaxRadius="6"
-        app:particlesBackgroundColor="@color/aO50"
+        app:particlesBackgroundColor="@color/aO"
         app:particleColor="@color/bb50"
         app:particleLineColor="@color/bb50"
         app:particleLinesEnabled="true"
         />
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:srcCompat="@drawable/loadb"
-        android:id="@+id/loadImg"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        />
-    <TextView
-        android:layout_below="@+id/loadImg"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/bb"
-        android:textSize="25sp"
-        android:paddingTop="10sp"
-        android:id="@+id/loadTxt"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        />
+        >
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            tools:srcCompat="@drawable/loadb"
+            android:id="@+id/loadImg"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/app_name"
+            android:textColor="@color/bb"
+            android:textSize="28sp"
+            android:paddingTop="10sp"
+            android:id="@+id/loadTxt"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
 </RelativeLayout>
