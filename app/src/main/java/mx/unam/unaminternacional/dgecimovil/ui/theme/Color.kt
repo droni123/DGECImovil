@@ -57,10 +57,10 @@ val md_theme_light_secondary = XdC
 val md_theme_dark_secondary = XdI
     val md_theme_dark_onSecondary = Xbb
 
-val md_theme_light_secondaryContainer = XdS
-    val md_theme_light_onSecondaryContainer = XdO
-val md_theme_dark_secondaryContainer = XdO
-    val md_theme_dark_onSecondaryContainer = XdS
+val md_theme_light_secondaryContainer = XaI
+    val md_theme_light_onSecondaryContainer = Xbb
+val md_theme_dark_secondaryContainer = XaC
+    val md_theme_dark_onSecondaryContainer = XaS
 //COLOR tertiary
 val md_theme_light_tertiary = XoC
     val md_theme_light_onTertiary = Xbb
@@ -77,9 +77,9 @@ val md_theme_light_background = XgC
 val md_theme_dark_background = Xnn
     val md_theme_dark_onBackground = XgC
 //COLOR surface
-val md_theme_light_surface = Xbb
-    val md_theme_light_onSurface = XgO
-val md_theme_dark_surface = XgO
+val md_theme_light_surface = XaC
+    val md_theme_light_onSurface = Xbb
+val md_theme_dark_surface = XaO
     val md_theme_dark_onSurface = Xbb
 
 val md_theme_light_surfaceVariant = XgC25

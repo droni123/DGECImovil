@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activitys.Home"
     android:background="@drawable/degradado_ao_ac"
-    >
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    android:orientation="vertical">
+    <androidx.compose.ui.platform.ComposeView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inicio"
-        android:textColor="@color/bb"
-        android:textSize="34sp"
-        android:textStyle="italic|bold"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/homeTop"
         />
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/HomeRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nn"
+        android:layout_weight="2"
+        />
+    <androidx.compose.ui.platform.ComposeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeMenu"
+        app:layout_flexGrow="1"
+        />
+</LinearLayout>

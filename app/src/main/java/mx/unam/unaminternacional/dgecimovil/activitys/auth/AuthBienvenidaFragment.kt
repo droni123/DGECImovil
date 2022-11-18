@@ -16,10 +16,7 @@ import android.view.ViewGroup
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,6 +28,7 @@ import androidx.viewpager2.widget.ViewPager2
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.databinding.FragmentMensajeBienvenidaBinding
 import mx.unam.unaminternacional.dgecimovil.ui.theme.DGECITheme
+import mx.unam.unaminternacional.dgecimovil.ui.theme.Xbb
 import mx.unam.unaminternacional.dgecimovil.ui.theme.XdI
 
 class AuthBienvenidaFragment : Fragment() {
@@ -50,7 +48,7 @@ class AuthBienvenidaFragment : Fragment() {
         spannable.setSpan(RelativeSizeSpan(1.80f), 0, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(RelativeSizeSpan(1.30f), 27, spannable.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         context?.let {
-            val color = ContextCompat.getColor(it, R.color.dI)
+            val color = ContextCompat.getColor(it, R.color.warning)
             spannable.setSpan(ForegroundColorSpan( color ), 107, spannable.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         spannable.setSpan(URLSpan(url),107,spannable.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -68,14 +66,15 @@ class AuthBienvenidaFragment : Fragment() {
     @Composable
     private fun btn_siguiente() {
         DGECITheme() {
-            Button(
+            ElevatedButton(
                 onClick = {
                     val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
                     viewPager?.currentItem = 1
                 },
                 modifier = Modifier.padding(15.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = XdI
+                    containerColor = XdI,
+                    contentColor = Xbb
                 )
             ) {
                 Text(

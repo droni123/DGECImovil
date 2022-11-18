@@ -31,9 +31,7 @@ import me.ibrahimsn.particle.ParticleView
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.activitys.Home
 import mx.unam.unaminternacional.dgecimovil.databinding.FragmentInicioSecionBinding
-import mx.unam.unaminternacional.dgecimovil.ui.theme.DGECITheme
-import mx.unam.unaminternacional.dgecimovil.ui.theme.Xbb
-import mx.unam.unaminternacional.dgecimovil.ui.theme.Xbb25
+import mx.unam.unaminternacional.dgecimovil.ui.theme.*
 
 class AuthLoginFragment : Fragment() {
 
@@ -131,7 +129,7 @@ class AuthLoginFragment : Fragment() {
                     },
                     modifier = Modifier.padding(15.dp)
                 )
-                Button(
+                ElevatedButton(
                     onClick = {
                         Log.e("DRONI",usuario)
                         Log.e("DRONI",pass)
@@ -144,7 +142,11 @@ class AuthLoginFragment : Fragment() {
                             activity?.overridePendingTransition( 0, R.drawable.fade_screen );
                         //}, 500)
                     },
-                    modifier = Modifier.padding(15.dp)
+                    modifier = Modifier.padding(15.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = XaC,
+                        contentColor = Xbb
+                    )
                 ) {
                     Text(
                         text = getString(R.string.iniciar_sesion),

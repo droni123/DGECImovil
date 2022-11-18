@@ -66,14 +66,15 @@ class AuthInstruccionesFragment : Fragment() {
     @Composable
     private fun btn_siguiente() {
         DGECITheme() {
-            Button(
+            ElevatedButton(
                 onClick = {
                     val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
                     viewPager?.currentItem = 2
                 },
                 modifier = Modifier.padding(15.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = XdI
+                    containerColor = XdI,
+                    contentColor = Xbb
                 )
             ) {
                 Text(
@@ -83,6 +84,5 @@ class AuthInstruccionesFragment : Fragment() {
                 Icon(imageVector = Icons.Filled.PlayArrow, getString(R.string.siguiente))
             }
         }
-
     }
 }
