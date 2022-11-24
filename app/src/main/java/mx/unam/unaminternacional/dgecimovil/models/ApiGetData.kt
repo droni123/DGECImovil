@@ -9,6 +9,6 @@ data class ApiGetData(
     @SerializedName("message")
     var message: String,
     @SerializedName("data")
-    var data : ApiTest ?= ApiTest("")
+    var data : ApiTest?= ApiTest("")
 ) : Serializable {}
 

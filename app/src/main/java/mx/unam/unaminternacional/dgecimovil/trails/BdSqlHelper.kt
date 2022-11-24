@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import mx.unam.unaminternacional.dgecimovil.models.DbConfig
 
-class BdSqlHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class BdSqlHelper() : SQLiteOpenHelper(AppDgeciMovil.instance, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object{
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "dgecimovil.db"
@@ -66,7 +66,7 @@ class BdSqlHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, n
         db.close()
         return resultado
     }
-    fun getConfig(key:String,showAll:Boolean=false):DbConfig{
+    fun getConfig(key:String,showAll:Boolean=false): DbConfig {
         var resultado = DbConfig(key=key)
         var query = "SELECT * FROM $TABLE_CONFIG WHERE $CKEY = ?"
         if(!showAll){ query += " and $CSTATUS = 1" }

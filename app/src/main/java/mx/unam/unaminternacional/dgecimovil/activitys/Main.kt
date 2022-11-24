@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.lifecycleScope
@@ -16,14 +17,15 @@ import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.activitys.auth.AuthMensaje
 import mx.unam.unaminternacional.dgecimovil.databinding.ActivityMainBinding
 import mx.unam.unaminternacional.dgecimovil.interfaces.ApiInterface
+import mx.unam.unaminternacional.dgecimovil.modelviews.MainViewModel
 import mx.unam.unaminternacional.dgecimovil.trails.ApiClient
-import mx.unam.unaminternacional.dgecimovil.trails.BdSqlHelper
 
 class Main : AppCompatActivity() {
     private lateinit var vi: ActivityMainBinding
     private lateinit var particleView: ParticleView
     private lateinit var anima: AnimatedVectorDrawable
-    private lateinit var bdHelper: BdSqlHelper
+    private val MainViewModel : MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vi = ActivityMainBinding.inflate(layoutInflater)
@@ -52,36 +54,38 @@ class Main : AppCompatActivity() {
     }
 
     fun inicializarAuth(context: Context) {
-        bdHelper = BdSqlHelper(context)
-        val datos = bdHelper.getConfig("tokenA")
-        if(datos.value.isNullOrEmpty()){
-            //INICIAMOS AUTH
-            Handler(Looper.getMainLooper()).postDelayed({
-                val vistaAuth = Intent(context, AuthMensaje::class.java)
-                startActivity(vistaAuth)
-                finish()
-                overridePendingTransition( 0, R.drawable.fade_screen );
-            }, 500)
-        }else{
-            val KEY_API = "oY4fG0WPTzvNzdg2BLTUpqbZrTXZbrJ89su6r8YzJjZy9IWrxTYRZ9Af7QG9"
-            val TAG = getString(R.string.dgeci)
-            var apiCliente = ApiClient.getInstancia()
-            var apiInstancia = apiCliente.create(ApiInterface::class.java)
-            lifecycleScope.launchWhenCreated {
-                try {
-                    //val data = DbConfig(key = "Nombre", value = "Idelfonso")
-                    //bdHelper.savConfig(data)
-                    //val datos = bdHelper.getConfig("Nombre")
-                    //bdHelper.delConfig("Nombre")
-                    val response = apiInstancia.getTest(KEY_API)
-                    if (response.isSuccessful) {
-                        showMensaje("${response.body().toString()}",context)
-                    }else{
-                        Log.e(TAG,response.toString())
+        MainViewModel.getConfiguracionInicial()
+        MainViewModel.datos.observe(this@Main){
+            if(it.value.isNullOrEmpty()){
+                //INICIAMOS AUTH
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val vistaAuth = Intent(context, AuthMensaje::class.java)
+                    startActivity(vistaAuth)
+                    finish()
+                    overridePendingTransition( 0, R.drawable.fade_screen );
+                }, 500)
+            }else{
+                val KEY_API = "oY4fG0WPTzvNzdg2BLTUpqbZrTXZbrJ89su6r8YzJjZy9IWrxTYRZ9Af7QG9"
+                val TAG = getString(R.string.dgeci)
+                var apiCliente = ApiClient.getInstancia()
+                var apiInstancia = apiCliente.create(ApiInterface::class.java)
+                lifecycleScope.launchWhenCreated {
+                    try {
+                        //val data = DbConfig(key = "Nombre", value = "Idelfonso")
+                        //bdHelper.savConfig(data)
+                        //val datos = bdHelper.getConfig("Nombre")
+                        //bdHelper.delConfig("Nombre")
+                        val response = apiInstancia.getTest(KEY_API)
+                        if (response.isSuccessful) {
+                            showMensaje("${response.body().toString()}",context)
+                        }else{
+                            Log.e(TAG,response.toString())
+                        }
+                    }catch (ex:Exception){
+                        Log.e(TAG,ex.toString())
                     }
-                }catch (ex:Exception){
-                    Log.e(TAG,ex.toString())
                 }
+
             }
         }
     }

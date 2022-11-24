@@ -14,14 +14,54 @@
         Accede a tu perfil y da click en vincular dispositivo.\n\n
         Con el token generado a la mano da click en siguiente.
     </string>
+    <string name="unam">UNAM</string>
     <string name="url_dgeci">https://sgmes.unaminternacional.unam.mx/</string>
-
     <string name="authCorreo">E-Mail</string>
     <string name="authNcuenta">No. de cuenta UNAM</string>
     <string name="authPass">Contraseña</string>
     <string name="authToken">Token</string>
     <string name="esconder">Esconder</string>
     <string name="mostrar">Mostrar</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="creditos_p1">Universidad Nacional Autónoma de México</string>
+    <string name="creditos_p2"><![CDATA[
+        <b>Dr. Enrique Graue Wiechers</b><br>
+        Rector<br><br>
+        <b>Dr. Leonardo Lomelí Vanegas</b><br>
+        Secretario General<br><br>
+        <b>Dr. Luis Álvarez Icaza Longoria</b><br>
+        Secretario Adminstrativo<br><br>
+        <b>Dr. Alfredo Sánchez Castañeda</b><br>
+        Abogado General<br><br>
+        <b>Dra. Patricia Dolores Dávila Aranda</b><br>
+        Secretaria de Desarrollo Institucional<br><br>
+        <b>Dr. Francisco Trigo Tavera</b><br>
+        Coordinador de Relaciones y Asuntos Internacionales
+    ]]></string>
+    <string name="creditos_p3">Dirección General de Cooperación e Internacionalización</string>
+    <string name="creditos_p4"><![CDATA[
+        <b>Mtro. Gerardo Reza Calderón</b><br>
+        Director General de Cooperación e Internacionalización<br><br>
+        <b>Mtra. Brenda Gasca Zambrano</b><br>
+        Directora de Intercambio y Movilidad Estudiantil<br><br>
+        <b>Lic. Jessica Carpinteiro Martínez</b><br>
+        Directora de Cooperación Académica<br><br>
+        <b>Mtra. Dolores González-Casanova Fernández</b><br>
+        Subdirectora de Enlace Institucional<br><br>
+        <b>Mtra. Pamela Suárez Valencia</b><br>
+        Coordinadora de Gestión<br><br>
+        <b>LI. Alfonso Baeza Villalobos</b><br>
+        Coordinador de Tecnologías de la Información<br><br>
+        <b>Mtro. Idelfonso De la Cruz Hernández</b><br>
+        Diseñador UX/UI y Desarrollador Full Stack
+    ]]></string>
+    <string name="creditos_p5"><![CDATA[
+        Copyright © Universidad Nacional Autónoma de México,<br>Dirección General de Cooperación e Internacionalización. <br>México 2023.
+    ]]></string>
 </resources>

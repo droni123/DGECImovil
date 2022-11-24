@@ -2,8 +2,6 @@ package mx.unam.unaminternacional.dgecimovil.activitys.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +29,10 @@ import me.ibrahimsn.particle.ParticleView
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.activitys.Home
 import mx.unam.unaminternacional.dgecimovil.databinding.FragmentInicioSecionBinding
-import mx.unam.unaminternacional.dgecimovil.ui.theme.*
+import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
+import mx.unam.unaminternacional.dgecimovil.ui.XaC
+import mx.unam.unaminternacional.dgecimovil.ui.Xbb
+import mx.unam.unaminternacional.dgecimovil.ui.Xbb25
 
 class AuthLoginFragment : Fragment() {
 

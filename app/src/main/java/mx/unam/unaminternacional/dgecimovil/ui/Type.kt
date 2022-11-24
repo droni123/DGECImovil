@@ -1,4 +1,4 @@
-package mx.unam.unaminternacional.dgecimovil.ui.theme
+package mx.unam.unaminternacional.dgecimovil.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

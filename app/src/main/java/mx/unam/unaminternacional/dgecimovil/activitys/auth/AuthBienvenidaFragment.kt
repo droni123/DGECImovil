@@ -27,9 +27,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.databinding.FragmentMensajeBienvenidaBinding
-import mx.unam.unaminternacional.dgecimovil.ui.theme.DGECITheme
-import mx.unam.unaminternacional.dgecimovil.ui.theme.Xbb
-import mx.unam.unaminternacional.dgecimovil.ui.theme.XdI
+import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
+import mx.unam.unaminternacional.dgecimovil.ui.Xbb
+import mx.unam.unaminternacional.dgecimovil.ui.XdI
 
 class AuthBienvenidaFragment : Fragment() {
     private var _binding: FragmentMensajeBienvenidaBinding? = null

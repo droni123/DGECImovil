@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activitys.creditos.CreditosFragment">
-
-    <TextView
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Creditos"
-        android:textColor="@color/bb"/>
-
-</FrameLayout>
+        app:particleCount="50"
+        app:particleMinRadius="3"
+        app:particleMaxRadius="6"
+        app:particlesBackgroundColor="@color/aO"
+        app:particleColor="@color/bb50"
+        app:particleLineColor="@color/bb50"
+        app:particleLinesEnabled="true"
+        />
+    <androidx.compose.ui.platform.ComposeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/creditosRoot"
+        />
+</RelativeLayout>

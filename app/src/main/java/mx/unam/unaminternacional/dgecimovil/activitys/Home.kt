@@ -1,39 +1,31 @@
 package mx.unam.unaminternacional.dgecimovil.activitys
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.CreditCard
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import kotlinx.coroutines.launch
+import androidx.lifecycle.MutableLiveData
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.activitys.configuracion.ConfiguracionFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.creditos.CreditosFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.mensajes.MensajesFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.perfil.PerfilFragment
 import mx.unam.unaminternacional.dgecimovil.databinding.ActivityHomeBinding
-import mx.unam.unaminternacional.dgecimovil.ui.theme.DGECITheme
+import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
 
 
 class Home : AppCompatActivity() {
     private lateinit var vi: ActivityHomeBinding
-
+    private val mutable = MutableLiveData<Boolean>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vi = ActivityHomeBinding.inflate(layoutInflater)
@@ -42,10 +34,10 @@ class Home : AppCompatActivity() {
         mostrarFragmento(MensajesFragment())
 
         vi.homeTop.setContent {
-            menuTopHome()
+            MenuTopHome()
         }
         vi.homeMenu.setContent {
-            menuHome()
+            MenuHome()
         }
     }
     private fun mostrarFragmento(fragment: Fragment){
@@ -57,7 +49,7 @@ class Home : AppCompatActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     @Preview
-    private fun menuTopHome() {
+    private fun MenuTopHome() {
         DGECITheme() {
             CenterAlignedTopAppBar(
                 title = {
@@ -88,6 +80,7 @@ class Home : AppCompatActivity() {
                             onClick = {
                                 expanded = false
                                 mostrarFragmento( CreditosFragment() )
+                                mutable.postValue(false)
                             },
                             leadingIcon = {
                                 Icon(
@@ -101,6 +94,7 @@ class Home : AppCompatActivity() {
                 actions = {
                     IconButton(onClick = {
                         mostrarFragmento( PerfilFragment() )
+                        mutable.postValue(false)
                     }) {
                         Icon(
                             imageVector = Icons.Filled.Photo,
@@ -111,10 +105,9 @@ class Home : AppCompatActivity() {
             )
         }
     }
-
     @Composable
     @Preview
-    private fun menuHome(isSelect:Boolean = false) {
+    private fun MenuHome() {
         DGECITheme() {
             var selectedItem by remember { mutableStateOf(0) }
             val items = listOf("Mensajes", "Configuración")
@@ -133,13 +126,16 @@ class Home : AppCompatActivity() {
                             when(items[index]){
                                 items[0] -> {
                                     mostrarFragmento( MensajesFragment() )
+                                    mutable.postValue(true)
                                 }
                                 items[1] -> {
                                     mostrarFragmento( ConfiguracionFragment() )
+                                    mutable.postValue(true)
                                 }
                             }
                         }
                     )
+                    this@Home.mutable.observe(this@Home) {  if (!it) { selectedItem = -1  }  }
                 }
             }
         }

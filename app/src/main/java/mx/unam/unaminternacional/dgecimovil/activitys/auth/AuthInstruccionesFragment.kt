@@ -1,43 +1,29 @@
 package mx.unam.unaminternacional.dgecimovil.activitys.auth
 
-import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
-import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
-import android.text.style.URLSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Login
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import mx.unam.unaminternacional.dgecimovil.R
-import mx.unam.unaminternacional.dgecimovil.activitys.Home
 import mx.unam.unaminternacional.dgecimovil.databinding.FragmentInstruccionesBinding
-import mx.unam.unaminternacional.dgecimovil.ui.theme.DGECITheme
-import mx.unam.unaminternacional.dgecimovil.ui.theme.Xbb
-import mx.unam.unaminternacional.dgecimovil.ui.theme.XdI
+import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
+import mx.unam.unaminternacional.dgecimovil.ui.Xbb
+import mx.unam.unaminternacional.dgecimovil.ui.XdI
 
 class AuthInstruccionesFragment : Fragment() {
     private var _binding: FragmentInstruccionesBinding? = null

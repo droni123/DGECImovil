@@ -1,4 +1,4 @@
-package mx.unam.unaminternacional.dgecimovil.ui.theme
+package mx.unam.unaminternacional.dgecimovil.ui
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
