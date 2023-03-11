@@ -22,7 +22,11 @@
     <string name="authToken">Token</string>
     <string name="esconder">Esconder</string>
     <string name="mostrar">Mostrar</string>
-
+    <string name="el_campo">El campo</string>
+    <string name="obligatorio">es obligatorio</string>
+    <string name="debe_ser_valido">debe ser válido</string>
+    <string name="advertencia">¡Advertencia!</string>
+    <string name="aceptar">Aceptar</string>
 
 
 
