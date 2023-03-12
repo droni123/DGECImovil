@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,6 +28,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.databinding.FragmentMensajeBienvenidaBinding
+import mx.unam.unaminternacional.dgecimovil.trails.AppDgeciMovil
 import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
 import mx.unam.unaminternacional.dgecimovil.ui.Xbb
 import mx.unam.unaminternacional.dgecimovil.ui.XdI
@@ -43,18 +45,15 @@ class AuthBienvenidaFragment : Fragment() {
         val view = binding.root
 
         val url = getString(R.string.url_dgeci)
+        val color = ContextCompat.getColor(AppDgeciMovil.instance, R.color.warning)
         val spannable = SpannableStringBuilder(getString(R.string.mensaje_bienvenida))
         spannable.setSpan(StyleSpan(Typeface.BOLD), 0, 21, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
         spannable.setSpan(RelativeSizeSpan(1.80f), 0, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(RelativeSizeSpan(1.30f), 27, spannable.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        context?.let {
-            val color = ContextCompat.getColor(it, R.color.warning)
-            spannable.setSpan(ForegroundColorSpan( color ), 107, spannable.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
+        spannable.setSpan(ForegroundColorSpan( color ), 107, spannable.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(URLSpan(url),107,spannable.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.mensajeBienvenida.text = spannable
         binding.mensajeBienvenida.movementMethod = LinkMovementMethod.getInstance()
-
         binding.siguiente.setContent {
             btn_siguiente()
         }
@@ -78,10 +77,10 @@ class AuthBienvenidaFragment : Fragment() {
                 )
             ) {
                 Text(
-                    text = getString(R.string.siguiente),
+                    text = stringResource(R.string.siguiente),
                     fontSize = 20.sp
                 )
-                Icon(imageVector = Icons.Filled.PlayArrow, getString(R.string.siguiente))
+                Icon(imageVector = Icons.Filled.PlayArrow, stringResource(R.string.siguiente))
             }
         }
 

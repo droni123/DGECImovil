@@ -36,7 +36,7 @@
             android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:fontFamily="@font/dgeci"
-            android:textSize="16sp"
+            android:textSize="15sp"
             />
     </LinearLayout>
     <androidx.compose.ui.platform.ComposeView

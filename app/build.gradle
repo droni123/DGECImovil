@@ -40,26 +40,26 @@ android {
     sourceSets{ //FOLDERS RECURSOS
         main{
             res.srcDirs = [
-                'src/main/res',
-                'src/main/res/layouts',
-                'src/main/res/layouts/auth',
-                'src/main/res/layouts/mensajes',
-                'src/main/res/layouts/perfil',
-                'src/main/res/layouts/configuracion',
-                'src/main/res/layouts/creditos'
+                    'src/main/res',
+                    'src/main/res/layouts',
+                    'src/main/res/layouts/auth',
+                    'src/main/res/layouts/mensajes',
+                    'src/main/res/layouts/perfil',
+                    'src/main/res/layouts/configuracion',
+                    'src/main/res/layouts/creditos'
             ]
         }
     }
 }
 dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.compose.ui:ui-tooling-preview:1.3.1'
+    implementation 'androidx.compose.ui:ui-tooling-preview:1.3.3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     //android-particles :)
     implementation 'com.github.ibrahimsn98:android-particles:2.0'
     //Retrofit - cliente REST && Gson serializar y de-serializar data entre objetos JSON y objetos
@@ -69,10 +69,11 @@ dependencies {
     //LOG HTTPS && CORRUTINAS ANDROID
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+
     //KTX ViewModel livedata
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
     //Navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -92,9 +93,11 @@ dependencies {
     implementation 'androidx.compose.material:material-icons-core:1.3.1'
     implementation 'androidx.compose.material:material-icons-extended:1.3.1'
 
-    implementation 'androidx.test.espresso.idling:idling-concurrent:3.5.0'
-    implementation 'androidx.activity:activity-compose:1.6.1'
-    debugImplementation 'androidx.compose.ui:ui-tooling:1.3.1'
+    implementation "androidx.compose.animation:animation:1.3.3"
+    implementation 'androidx.compose.animation:animation-graphics:1.3.3'
 
+    implementation 'androidx.test.espresso.idling:idling-concurrent:3.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.1'
+    debugImplementation 'androidx.compose.ui:ui-tooling:1.3.3'
 
 }

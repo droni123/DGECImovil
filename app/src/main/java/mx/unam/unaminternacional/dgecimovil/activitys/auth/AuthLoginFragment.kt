@@ -1,32 +1,47 @@
 package mx.unam.unaminternacional.dgecimovil.activitys.auth
 
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import me.ibrahimsn.particle.ParticleView
 import mx.unam.unaminternacional.dgecimovil.R
+import mx.unam.unaminternacional.dgecimovil.activitys.Home
 import mx.unam.unaminternacional.dgecimovil.databinding.FragmentInicioSecionBinding
+import mx.unam.unaminternacional.dgecimovil.modelviews.MainViewModel
+import mx.unam.unaminternacional.dgecimovil.trails.AppDgeciMovil
+import mx.unam.unaminternacional.dgecimovil.trails.Constantes
 import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
 import mx.unam.unaminternacional.dgecimovil.ui.XaC
 import mx.unam.unaminternacional.dgecimovil.ui.Xbb
@@ -39,7 +54,8 @@ class AuthLoginFragment : Fragment() {
 
     private val binding get() = _binding!!
     private lateinit var particleView: ParticleView
-
+    private val MainViewModel : MainViewModel by viewModels()
+    private lateinit var anima: AnimatedVectorDrawable
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,12 +63,13 @@ class AuthLoginFragment : Fragment() {
         _binding = FragmentInicioSecionBinding.inflate(inflater,container,false)
         val view = binding.root
         particleView = binding.particleView
+        val animacion = binding.loadImg
+        animacion.setImageResource(R.drawable.loadb)
+        anima = animacion.drawable as AnimatedVectorDrawable
+
         binding.formularioIs.setContent {
             formularioInicio()
         }
-        /*setContent {
-            formularioInicio()
-        }*/
         return view
     }
 
@@ -65,17 +82,22 @@ class AuthLoginFragment : Fragment() {
         super.onResume()
         particleView.resume()
     }
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationGraphicsApi::class)
     @Preview(name = "Formulario")
     @Composable
     private fun formularioInicio(){
+        var visible by remember { mutableStateOf(true) }
+        val openDialog = remember { mutableStateOf(false)  }
+        val mensDialig = remember { mutableStateOf("") }
+
         DGECITheme() {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                var color_input = TextFieldDefaults.outlinedTextFieldColors(
+
+                val color_input = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Xbb25,
                     focusedLabelColor = Xbb,
                     textColor = Xbb
@@ -84,131 +106,157 @@ class AuthLoginFragment : Fragment() {
                 var pass by rememberSaveable { mutableStateOf("") }
                 var passVisible by rememberSaveable { mutableStateOf(false) }
                 var token by rememberSaveable { mutableStateOf("") }
-                var openDialog = remember { mutableStateOf(false)  }
-                var mensDialig = remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = usuario,
-                    onValueChange = { usuario = it },
-                    singleLine = true,
-                    label = { Text("${getString(R.string.authCorreo)} / ${getString(R.string.authNcuenta)}") },
-                    colors = color_input,
-                    leadingIcon = {
-                        Icon(imageVector  = Icons.Filled.VerifiedUser, "${getString(R.string.authCorreo)} / ${getString(R.string.authNcuenta)}")
-                    },
-                    modifier = Modifier.padding(15.dp)
-                )
-                OutlinedTextField(
-                    value = pass,
-                    onValueChange = { pass = it },
-                    label = { Text(getString(R.string.authPass)) },
-                    singleLine = true,
-                    //placeholder = { Text("Password") },
-                    visualTransformation = if (passVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    trailingIcon = {
-                        val image = if (passVisible)  Icons.Filled.Visibility  else Icons.Filled.VisibilityOff
-                        val description = if (passVisible) "${getString(R.string.esconder)} ${getString(R.string.authPass)}" else "${getString(R.string.mostrar)} ${getString(R.string.authPass)}"
-                        IconButton(onClick = {passVisible = !passVisible}){
-                            Icon(imageVector  = image, description)
-                        }
-                    },
-                    colors = color_input,
-                    leadingIcon = {
-                        Icon(imageVector  = Icons.Filled.Password, getString(R.string.authPass))
-                    },
-                    modifier = Modifier.padding(15.dp)
-                )
-                OutlinedTextField(
-                    value = token,
-                    onValueChange = { token = it },
-                    singleLine = true,
-                    label = { Text(getString(R.string.authToken)) },
-                    colors = color_input,
-                    leadingIcon = {
-                        Icon(imageVector  = Icons.Filled.Token, getString(R.string.authToken))
-                    },
-                    modifier = Modifier.padding(15.dp)
-                )
-                ElevatedButton(
-                    onClick = {
-                        var iniciar_login = true
-                        mensDialig.value = ""
-                        if( usuario.isEmpty() ){
-                            iniciar_login = false
-                            mensDialig.value += "${getString(R.string.el_campo)} ${getString(R.string.authCorreo)} / ${getString(R.string.authNcuenta)} ${getString(R.string.obligatorio)}"
-                        }
-                        if( pass.isEmpty() ){
-                            iniciar_login = false
-                            mensDialig.value += (if (mensDialig.value.isEmpty()) "" else "\n")+"${getString(R.string.el_campo)} ${getString(R.string.authPass)} ${getString(R.string.obligatorio)}"
-                        }
-                        if( token.isEmpty() ){
-                            iniciar_login = false
-                            mensDialig.value += (if (mensDialig.value.isEmpty()) "" else "\n")+"${getString(R.string.el_campo)} ${getString(R.string.authToken)} ${getString(R.string.obligatorio)}"
-                        }
-                        if(iniciar_login){
-                            val pattern_ncta = Pattern.compile( "^[0-9]{9}$", Pattern.UNICODE_CASE)
-                            val is_emal = Patterns.EMAIL_ADDRESS.matcher(usuario).matches()
-                            val is_n_cuenta = pattern_ncta.matcher(usuario).matches() && usuario.length == 9
-                            if( !is_emal && !is_n_cuenta ){
-                                iniciar_login = false
-                                mensDialig.value += "${getString(R.string.el_campo)} ${getString(R.string.authCorreo)} / ${getString(R.string.authNcuenta)} ${getString(R.string.debe_ser_valido)}"
+                val stringUsuario =  "${stringResource(R.string.authCorreo)} / ${stringResource(R.string.authNcuenta)}"
+                val stringContrasena = stringResource(R.string.authPass)
+                val stringEsconder = stringResource(R.string.esconder)
+                val stringMostrar = stringResource(R.string.mostrar)
+                val stringToken = stringResource(R.string.authToken)
+                val stringElcampo = stringResource(R.string.el_campo)
+                val stringObligatorio = stringResource(R.string.obligatorio)
+                val stringValido = stringResource(R.string.debe_ser_valido)
+                val stringIniciarSeccion = stringResource(R.string.iniciar_sesion)
+                if(visible){
+                    OutlinedTextField(
+                        value = usuario,
+                        onValueChange = { usuario = it },
+                        singleLine = true,
+                        label = { Text(stringUsuario) },
+                        colors = color_input,
+                        leadingIcon = {
+                            Icon(imageVector  = Icons.Filled.VerifiedUser, stringUsuario)
+                        },
+                        modifier = Modifier.padding(15.dp)
+                    )
+                    OutlinedTextField(
+                        value = pass,
+                        onValueChange = { pass = it },
+                        label = { Text(stringContrasena) },
+                        singleLine = true,
+                        visualTransformation = if (passVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                        trailingIcon = {
+                            val image = if (passVisible)  Icons.Filled.Visibility  else Icons.Filled.VisibilityOff
+                            val description = if (passVisible) "${stringEsconder} ${stringContrasena}" else "${stringMostrar} ${stringContrasena}"
+                            IconButton(onClick = {passVisible = !passVisible}){
+                                Icon(imageVector  = image, description)
                             }
-                        }
-                        if(!iniciar_login){
-                            openDialog.value = true
-                        }else{
-                            Log.e("DRONI",usuario)
-                            Log.e("DRONI",pass)
-                            Log.e("DRONI",token)
-                            /*
-                        //Handler(Looper.getMainLooper()).postDelayed({
-                            val vistaWelcome = Intent(context, Home::class.java)
-                            startActivity(vistaWelcome)
-                            activity?.finish()
-                            activity?.overridePendingTransition( 0, R.drawable.fade_screen );
-                        //}, 500)
-                        */
-                        }
-                    },
-                    modifier = Modifier.padding(15.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = XaC,
-                        contentColor = Xbb
+                        },
+                        colors = color_input,
+                        leadingIcon = {
+                            Icon(imageVector  = Icons.Filled.Password, stringContrasena)
+                        },
+                        modifier = Modifier.padding(15.dp)
                     )
-                ) {
-                    Text(
-                        text = getString(R.string.iniciar_sesion),
-                        fontSize = 20.sp
+                    OutlinedTextField(
+                        value = token,
+                        onValueChange = { token = it },
+                        singleLine = true,
+                        label = { Text(stringToken) },
+                        colors = color_input,
+                        leadingIcon = {
+                            Icon(imageVector  = Icons.Filled.Token, stringToken)
+                        },
+                        modifier = Modifier.padding(15.dp)
                     )
-                    Icon(imageVector = Icons.Filled.Login,getString(R.string.iniciar_sesion))
+                    ElevatedButton(
+                        onClick = {
+                            var iniciar_login = true
+                            mensDialig.value = ""
+                            if( usuario.isEmpty() ){
+                                iniciar_login = false
+                                mensDialig.value += "${stringElcampo} ${stringUsuario} ${stringObligatorio}"
+                            }
+                            if( pass.isEmpty() ){
+                                iniciar_login = false
+                                mensDialig.value += (if (mensDialig.value.isEmpty()) "" else "\n")+"${stringElcampo} ${stringContrasena} ${stringObligatorio}"
+                            }
+                            if( token.isEmpty() ){
+                                iniciar_login = false
+                                mensDialig.value += (if (mensDialig.value.isEmpty()) "" else "\n")+"${stringElcampo} ${stringToken} ${stringObligatorio}"
+                            }
+                            if(iniciar_login){
+                                val pattern_ncta = Pattern.compile( "^[0-9]{9}$", Pattern.UNICODE_CASE)
+                                val is_emal = Patterns.EMAIL_ADDRESS.matcher(usuario).matches()
+                                val is_n_cuenta = pattern_ncta.matcher(usuario).matches() && usuario.length == 9
+                                if( !is_emal && !is_n_cuenta ){
+                                    iniciar_login = false
+                                    mensDialig.value += "${stringElcampo} ${stringUsuario} ${stringValido}"
+                                }
+                            }
+                            if(!iniciar_login){
+                                openDialog.value = true
+                            }else{
+                                MainViewModel.initLogin(usuario,pass,token)
+
+                            }
+                        },
+                        modifier = Modifier.padding(15.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = XaC,
+                            contentColor = Xbb
+                        )
+                    ) {
+                        Text(
+                            text = stringIniciarSeccion,
+                            fontSize = 20.sp
+                        )
+                        Icon(imageVector = Icons.Filled.Login,stringIniciarSeccion)
+                    }
                 }
                 ////////////////ALERT
                 if (openDialog.value) {
-                    Log.e("DRONI",mensDialig.value)
-                    openDialog.value = false
-                    /*
                     AlertDialog(
                         onDismissRequest = { openDialog.value = false },
                         title = {
-                            Text(text = getString(R.string.advertencia))
+                            Text(
+                                text = stringResource(id = R.string.advertencia),
+                                textAlign = TextAlign.Center
+                            )
                         },
-                        text = {
-                            Text( mensDialig.value )
-                        },
-                        dismissButton = {
+                        text = { Text(mensDialig.value) },
+                        confirmButton = {
                             Button(
-                                onClick = {
-                                    openDialog.value = false
-                                }) {
-                                Text(getString(R.string.aceptar))
+                                onClick = { openDialog.value = false }
+                            ) {
+                                Text( text = stringResource(id = R.string.aceptar) )
                             }
                         }
                     )
-                    */
                 }
 
-
             }
+        }
+
+        /////////////////
+        MainViewModel.loader.observe(viewLifecycleOwner) {
+            visible = !it
+            if (it) {
+                binding.loadImgCon.visibility = View.VISIBLE
+                anima.start()
+            }else {
+                binding.loadImgCon.visibility = View.INVISIBLE
+                anima.stop()
+            }
+        }
+        MainViewModel.datosResponceAuth.observe(viewLifecycleOwner) { ok ->
+            if ((ok.error?.size ?: 0) > 0){
+                ok.error!!.forEach {
+                    mensDialig.value += (if (mensDialig.value.isEmpty()) "" else "\n")+"${it}"
+                }
+                openDialog.value = true
+            } else {
+                visible = false
+                startActivity()
+            }
+        }
+    }
+    fun startActivity(){
+        Log.e(Constantes.LOGTAG,"DEMOS")
+        activity?.let {
+            val vistaWelcome = Intent(AppDgeciMovil.instance, Home::class.java)
+            startActivity(vistaWelcome)
+            it.finish()
+            it.overridePendingTransition( 0, R.drawable.fade_screen )
         }
     }
 }

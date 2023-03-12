@@ -40,8 +40,6 @@ class AuthInstruccionesFragment : Fragment() {
         spannable.setSpan(RelativeSizeSpan(1.30f), 0, spannable.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.mensajeInstrucciones.text = spannable
         binding.mensajeInstrucciones.movementMethod = LinkMovementMethod.getInstance()
-
-
         binding.siguiente2.setContent {
             btn_siguiente()
         }
@@ -64,10 +62,10 @@ class AuthInstruccionesFragment : Fragment() {
                 )
             ) {
                 Text(
-                    text = getString(R.string.siguiente),
+                    text = context?.let{ getString(R.string.siguiente)} ?: run { "" },
                     fontSize = 20.sp
                 )
-                Icon(imageVector = Icons.Filled.PlayArrow, getString(R.string.siguiente))
+                Icon(imageVector = Icons.Filled.PlayArrow, context?.let{ getString(R.string.siguiente)} ?: run { "" })
             }
         }
     }

@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import mx.unam.unaminternacional.dgecimovil.R
@@ -20,6 +21,8 @@ import mx.unam.unaminternacional.dgecimovil.activitys.creditos.CreditosFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.mensajes.MensajesFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.perfil.PerfilFragment
 import mx.unam.unaminternacional.dgecimovil.databinding.ActivityHomeBinding
+import mx.unam.unaminternacional.dgecimovil.trails.BdSqlHelper
+import mx.unam.unaminternacional.dgecimovil.trails.Constantes
 import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
 
 
@@ -30,9 +33,7 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         vi = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(vi.root)
-
         mostrarFragmento(MensajesFragment())
-
         vi.homeTop.setContent {
             MenuTopHome()
         }
