@@ -19,6 +19,9 @@ import mx.unam.unaminternacional.dgecimovil.databinding.ActivityMainBinding
 import mx.unam.unaminternacional.dgecimovil.interfaces.ApiInterface
 import mx.unam.unaminternacional.dgecimovil.modelviews.MainViewModel
 import mx.unam.unaminternacional.dgecimovil.trails.ApiClient
+import mx.unam.unaminternacional.dgecimovil.trails.AppDgeciMovil
+import mx.unam.unaminternacional.dgecimovil.trails.BdSqlHelper
+import mx.unam.unaminternacional.dgecimovil.trails.Constantes
 
 class Main : AppCompatActivity() {
     private lateinit var vi: ActivityMainBinding
@@ -63,29 +66,13 @@ class Main : AppCompatActivity() {
                     startActivity(vistaAuth)
                     finish()
                     overridePendingTransition( 0, R.drawable.fade_screen );
-                }, 500)
+                }, Constantes.KEY_TIEMPO_DE_ESPERA_STAR)
             }else{
-                val KEY_API = "oY4fG0WPTzvNzdg2BLTUpqbZrTXZbrJ89su6r8YzJjZy9IWrxTYRZ9Af7QG9"
-                val TAG = getString(R.string.dgeci)
-                var apiCliente = ApiClient.getInstancia()
-                var apiInstancia = apiCliente.create(ApiInterface::class.java)
-                lifecycleScope.launchWhenCreated {
-                    try {
-                        //val data = DbConfig(key = "Nombre", value = "Idelfonso")
-                        //bdHelper.savConfig(data)
-                        //val datos = bdHelper.getConfig("Nombre")
-                        //bdHelper.delConfig("Nombre")
-                        val response = apiInstancia.getTest(KEY_API)
-                        if (response.isSuccessful) {
-                            showMensaje("${response.body().toString()}",context)
-                        }else{
-                            Log.e(TAG,response.toString())
-                        }
-                    }catch (ex:Exception){
-                        Log.e(TAG,ex.toString())
-                    }
-                }
-
+                MainViewModel.delete()
+                val vistaWelcome = Intent(AppDgeciMovil.instance, Home::class.java)
+                startActivity(vistaWelcome)
+                finish()
+                overridePendingTransition( 0, R.drawable.fade_screen );
             }
         }
     }

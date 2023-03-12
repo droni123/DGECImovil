@@ -10,13 +10,10 @@ class ViewPagerAdapter(
     fm: FragmentManager,
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fm, lifecycle) {
-
     private val fragmentList: ArrayList<Fragment> = list
-
     override fun getItemCount(): Int {
         return fragmentList.size
     }
-
     override fun createFragment(position: Int): Fragment {
         return fragmentList[position]
     }

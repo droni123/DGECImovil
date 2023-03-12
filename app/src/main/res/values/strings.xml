@@ -29,7 +29,12 @@
     <string name="aceptar">Aceptar</string>
 
 
-
+    <string name="SIN_INTERNET">Sin Internet</string>
+    <string name="REGRESO_INTERNET">Regreso internet</string>
+    <string name="ERROR_SERVER">Error en servidor</string>
+    <string name="ERROR_">Error: %s</string>
+    <string name="ERROR">Error</string>
+    <string name="ERROR_RED">Error en red</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
