@@ -1,34 +1,55 @@
 package mx.unam.unaminternacional.dgecimovil.activitys
 
-import android.app.Activity
+import android.media.Image
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.launch
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.activitys.configuracion.ConfiguracionFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.creditos.CreditosFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.mensajes.MensajesFragment
 import mx.unam.unaminternacional.dgecimovil.activitys.perfil.PerfilFragment
 import mx.unam.unaminternacional.dgecimovil.databinding.ActivityHomeBinding
-import mx.unam.unaminternacional.dgecimovil.trails.BdSqlHelper
+import mx.unam.unaminternacional.dgecimovil.modelviews.HomeViewModel
 import mx.unam.unaminternacional.dgecimovil.trails.Constantes
 import mx.unam.unaminternacional.dgecimovil.ui.DGECITheme
 
 
 class Home : AppCompatActivity() {
     private lateinit var vi: ActivityHomeBinding
+
     private val mutable = MutableLiveData<Boolean>()
+    private val mutableMenuLeft = MutableLiveData<Boolean>()
+
+    private val HomeViewModel : HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vi = ActivityHomeBinding.inflate(layoutInflater)
@@ -40,6 +61,12 @@ class Home : AppCompatActivity() {
         vi.homeMenu.setContent {
             MenuHome()
         }
+        vi.homeLeft.setContent{
+            MenuLeft()
+        }
+
+        //vi.homeLeft.z = 0F
+
     }
     private fun mostrarFragmento(fragment: Fragment){
         val iniciaFragment = supportFragmentManager.beginTransaction()
@@ -63,15 +90,16 @@ class Home : AppCompatActivity() {
                     )
                 },
                 navigationIcon = {
-                    var expanded by remember { mutableStateOf(false) }
+                    //var expanded by remember { mutableStateOf(false) }
                     IconButton(onClick = {
-                        expanded = true
+                        mutableMenuLeft.postValue(true)
                     }) {
                         Icon(
                             imageVector = Icons.Filled.Menu,
                             contentDescription = "Menu"
                         )
                     }
+                    /*
                     DropdownMenu(
                         expanded = expanded,
                         onDismissRequest = { expanded = false }
@@ -91,6 +119,7 @@ class Home : AppCompatActivity() {
                             }
                         )
                     }
+                    */
                 },
                 actions = {
                     IconButton(onClick = {
@@ -136,7 +165,70 @@ class Home : AppCompatActivity() {
                             }
                         }
                     )
-                    this@Home.mutable.observe(this@Home) {  if (!it) { selectedItem = -1  }  }
+                    this@Home.mutable.observe(this@Home) {
+                        if (!it) { selectedItem = -1  }
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    @Preview
+    private fun MenuLeft(){
+        DGECITheme() {
+            val drawerState = rememberDrawerState(DrawerValue.Closed)
+            val scope = rememberCoroutineScope()
+            val items = listOf(Icons.Filled.Star)
+            val itemsTxt = listOf("Creditos")
+            val selectedItem = remember { mutableStateOf(items[0]) }
+
+            ModalNavigationDrawer(
+                drawerState = drawerState,
+                drawerContent = {
+
+
+
+                    ModalDrawerSheet {
+                        Spacer(Modifier.height(12.dp))
+                        Image( painter = painterResource(id = R.drawable.icosvg),
+                            contentDescription = "ACEPTAR",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(150.dp)
+                                .clip(CircleShape)
+                        )
+                        Spacer(Modifier.height(12.dp))
+                        items.forEachIndexed { index, item ->
+                            NavigationDrawerItem(
+                                icon = { Icon(item, contentDescription = null) },
+                                label = { Text(itemsTxt[index]) },
+                                selected = item == selectedItem.value,
+                                onClick = {
+                                    scope.launch {
+                                        drawerState.close()
+                                        mutableMenuLeft.postValue(false)
+                                    }
+                                    selectedItem.value = item
+                                },
+                                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                            )
+                        }
+                    }
+                },
+            content = {
+
+            }
+        )
+
+            this@Home.mutableMenuLeft.observe(this@Home) {
+
+                if (it) {
+                    vi.homeLeft.z = 1F
+                    scope.launch { drawerState.open() }
+                } else {
+                    vi.homeLeft.z = 0F
                 }
             }
         }

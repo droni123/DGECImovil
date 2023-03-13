@@ -3,16 +3,12 @@ package mx.unam.unaminternacional.dgecimovil.modelviews
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mx.unam.unaminternacional.dgecimovil.R
 import mx.unam.unaminternacional.dgecimovil.interfaces.ApiInterface
@@ -23,9 +19,6 @@ import mx.unam.unaminternacional.dgecimovil.models.DbConfig
 import mx.unam.unaminternacional.dgecimovil.trails.AppDgeciMovil
 import mx.unam.unaminternacional.dgecimovil.trails.Constantes
 import mx.unam.unaminternacional.dgecimovil.trails.RetrofitService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 class MainViewModel : ViewModel()  {
     private lateinit var bdHelper: BdSqlHelper
 
@@ -86,12 +79,13 @@ class MainViewModel : ViewModel()  {
                                     } else {
                                         datosBlancos.error?.add("2: ${AppDgeciMovil.instance.getString(R.string.ERROR)}")
                                         datosResponceAuth.postValue(datosBlancos)
+                                        loader.postValue(false)
                                     }
                                 } else {
                                     datosBlancos.error?.add("1: ${AppDgeciMovil.instance.getString(R.string.ERROR)}")
                                     datosResponceAuth.postValue(datosBlancos)
+                                    loader.postValue(false)
                                 }
-                                loader.postValue(false)
                             } else {
                                 datosResponceAuth.postValue(dataAuth)
                                 //ERROR EN CREDENCIALES

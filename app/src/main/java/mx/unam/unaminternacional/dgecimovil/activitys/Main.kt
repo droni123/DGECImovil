@@ -59,21 +59,23 @@ class Main : AppCompatActivity() {
     fun inicializarAuth(context: Context) {
         MainViewModel.getConfiguracionInicial()
         MainViewModel.datos.observe(this@Main){
-            if(it.value.isNullOrEmpty()){
+            //if(it.value.isNullOrEmpty()){
                 //INICIAMOS AUTH
+                /**
                 Handler(Looper.getMainLooper()).postDelayed({
                     val vistaAuth = Intent(context, AuthMensaje::class.java)
                     startActivity(vistaAuth)
                     finish()
                     overridePendingTransition( 0, R.drawable.fade_screen );
                 }, Constantes.KEY_TIEMPO_DE_ESPERA_STAR)
-            }else{
-                MainViewModel.delete()
+                **/
+            //}else{
+                //MainViewModel.delete()
                 val vistaWelcome = Intent(AppDgeciMovil.instance, Home::class.java)
                 startActivity(vistaWelcome)
                 finish()
                 overridePendingTransition( 0, R.drawable.fade_screen );
-            }
+            //}
         }
     }
     fun showMensaje(mensaje:String,context: Context){
